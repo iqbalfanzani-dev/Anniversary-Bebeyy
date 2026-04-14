@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary Sayang 💖</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #ffe4e1; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ff69b4; display: flex; justify-content: center; align-items: center; z-index: 999; flex-direction: column; color: white; transition: 0.5s; text-align: center; }
+        
+        .container { 
+            text-align: center; background: white; padding: 25px; border-radius: 25px; 
+            max-width: 450px; width: 90%; display: none; border: 4px solid #ff69b4; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 20px 0;
+        }
+
+        h1 { color: #ff1493; font-size: 1.8rem; margin-bottom: 5px; }
+        
+        .photo-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; 
+        }
+        .photo-grid img { 
+            width: 100%; height: 150px; border-radius: 15px; border: 2px solid #ff69b4; 
+            object-fit: cover; transition: 0.3s;
+        }
+        .photo-grid img:hover { transform: scale(1.05); }
+
+        .video-section { margin-top: 20px; }
+        video { 
+            width: 100%; border-radius: 15px; border: 2px solid #ff69b4; 
+            background: black; margin-bottom: 15px;
+        }
+
+        .btn-open { padding: 15px 30px; border-radius: 50px; border: none; background: white; color: #ff69b4; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
+        .heart { position: fixed; top: -20px; animation: fall 3s linear forwards; z-index: 100; pointer-events: none; }
+        @keyframes fall { to { transform: translateY(100vh); } }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <h2 style="margin-bottom: 20px;">Halo Pacarrkuuuu > < ✨</h2>
+        <button class="btn-open" onclick="mulai()">Klik untuk Kejutannya bebeyy 🎁</button>
+    </div>
+
+    <audio id="lagu" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="konten">
+        <h1>Happy Anniversary! 🌸</h1>
+        <p style="color: #db7093;">Untuk <b> Bebeyyy</b></p>
+        
+        <div class="photo-grid">
+            <img src="Foto 1.jpg">
+            <img src="Foto 2.jpg">
+            <img src="Foto 3.jpg">
+            <img src="Foto 4.jpg">
+        </div>
+
+        <p style="color: #ff1493; font-style: italic;">
+            "Terima kasih sudah selalu ada di sampingku. With you everything is better"
+        </p>
+
+        <!-- VIDEO AUTOPLAY -->
+        <div class="video-section">
+            <video autoplay muted loop playsinline>
+                <source src="Video 1.mp4" type="video/mp4">
+            </video>
+
+            <video autoplay muted loop playsinline>
+                <source src="Video 2.mp4" type="video/mp4">
+            </video>
+
+            <video autoplay muted loop playsinline>
+                <source src="Video 3.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div style="font-size: 2rem; margin-top: 15px;">₍ᐢ. .ᐢ₎ ❤️ 🎀</div>
+        <p id="counter" style="color: #db7093; font-weight: bold;"></p>
+    </div>
+
+    <script>
+        function mulai() {
+            var audio = document.getElementById('lagu');
+            audio.play().catch(() => {});
+
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(function() {
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('konten').style.display = 'block';
+                setInterval(createHeart, 300);
+            }, 500);
+            
+            tampilkanHari();
+        }
+
+        function tampilkanHari() {
+            const tanggalJadian = new Date("2026-03-26");
+            const hariIni = new Date();
+            const diffTime = Math.abs(hariIni - tanggalJadian);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            document.getElementById('counter').innerHTML =
+                "Kita sudah bersama selama " + diffDays + " hari ❤️";
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = '💗';
+            heart.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 3000);
+        }
+    </script>
+
+</body>
+</html>
